@@ -1,0 +1,50 @@
+
+._grid img[alt="main_bg"] {
+    width: 100%;
+    height: auto;
+}
+
+._grid .grid_wrapper {
+    position: relative;
+    will-change: transform;
+    transition: all 300ms ease 0s;
+}
+
+._grid .grid_wrapper img[alt="small_bg"] {
+    z-index: 1;
+    bottom: 0px;
+    left: 38%;
+    width: 68%;
+    position: absolute;
+    will-change: transform;
+    transition: all 300ms ease 0s;
+}
+
+._grid .grid_wrapper img[alt="small_bg"]:hover {
+    transform: translate(3%, 0px);
+}
+
+._grid .grid_wrapper:hover {
+    transform: translate(0px, -4%);
+}
+
+
+._grid .grid_footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    align-items: center;
+}
+
+._grid .grid_footer h2 {
+    margin-bottom: 0;
+    color: #ffffff;
+    font-size: 1.5em;
+    line-height: initial;
+}
+
+._grid .grid_footer span {
+    font-size: 14px;
+    color: #dfdfdf;
+}

@@ -1,0 +1,26 @@
+header.ant-layout-header .logo {
+    width: 120px;
+    line-height: initial;
+    color: #ffffff;
+    font-size: 23px;
+    text-align: center;
+}
+
+.ant-layout-header {
+    background-color: rgb(25, 44, 56)!important;
+}
+.header header.ant-layout-header {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(10, 28, 39, 0.4) 0px 5px 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color: #0a1c27!important;
+}
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+    background: #192b38!important;
+}

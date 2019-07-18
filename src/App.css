@@ -1,0 +1,12 @@
+section.layout.ant-layout .header + main.ant-layout-content {
+    padding: 0 50px;
+}
+
+section.layout.ant-layout .header + main.ant-layout-content {
+    min-height: calc(100vh - 133px);
+    background-color: #192b38;
+}
+.ant-layout-footer {
+    background-color: #0a1c27;
+    color: #ffffff;
+}
