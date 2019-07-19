@@ -8,6 +8,7 @@
     position: relative;
     will-change: transform;
     transition: all 300ms ease 0s;
+    cursor: pointer;
 }
 
 ._grid .grid_wrapper img[alt="small_bg"] {
@@ -20,7 +21,7 @@
     transition: all 300ms ease 0s;
 }
 
-._grid .grid_wrapper img[alt="small_bg"]:hover {
+._grid .grid_wrapper:hover img[alt="small_bg"] {
     transform: translate(3%, 0px);
 }
 
@@ -47,4 +48,8 @@
 ._grid .grid_footer span {
     font-size: 14px;
     color: #dfdfdf;
+}
+
+._grid#plinko .grid_wrapper img[alt="small_bg"] {
+    width: auto;
 }
