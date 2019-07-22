@@ -9,7 +9,7 @@ main.ant-layout-content .baccarat {
     border-radius: 6px 0px 0px 6px;
 }
 
-.baccarat .ant-row {
+.baccarat> .ant-row {
     box-shadow: rgba(25, 25, 25, 0.75) 0px 0px 10px;
     background-color: rgb(18, 34, 46);
     border-radius: 6px;
@@ -271,5 +271,102 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 .baccarat .baccarat_tab {
-    min-height: calc(100vh - 233px);
+    min-height: 690px;
+}
+
+.baccarat_footer .ant-col:last-child {
+    text-align: right;
+}
+
+.baccarat_footer button {font-weight: 600;font-size: 1.2em;touch-action: manipulation;position: relative;display: inline-flex;-webkit-box-pack: center;justify-content: center;-webkit-box-align: center;align-items: center;color: rgb(183, 191, 214);transition: background 300ms ease 0s, opacity 300ms ease 0s, transform 100ms ease 0s;border-radius: 5px;}
+
+.baccarat_footer button:hover,.baccarat_footer button:focus {
+    color: #dedede;
+}
+.baccarat_footer {
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    gap: 1em 1em;
+    padding-top:74px; 
+}
+
+.baccarat_footer .btn_wrapper {
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 1rem;
+}
+
+.baccarat_footer .wrapper {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em 1em;
+}
+
+.baccarat_footer .wrapper .text {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    text-transform: uppercase;
+    color: rgb(134, 144, 164);
+    font-weight: 600;
+    font-size: 1.2em;
+    transform: translate(-50%, -100%);
+}
+
+.baccarat_footer .wrapper .inner_col .custom_bet_btn {
+    font-weight: 600;
+    font-size: inherit;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    line-height: 1.5;
+    color: rgb(183, 191, 214);
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    transition: background 300ms ease 0s, opacity 300ms ease 0s, transform 100ms ease 0s;
+    border-radius: 5px;
+    background: rgb(46, 68, 82);
+    padding: 2em 1em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(38, 55, 66);
+    border-image: initial;
+    width: 100%;
+    height: unset;
+}
+
+.custom_bet_btn:hover {
+    background: rgb(55, 82, 98)!important;
+}
+
+.baccarat .main_section {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    background-size: 40%;
+    padding: 1em;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.baccarat .main_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 690px;
+    max-height: max-content;
 }
