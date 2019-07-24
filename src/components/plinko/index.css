@@ -1,0 +1,113 @@
+main.ant-layout-content .plinko {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color:#ffffff;
+}
+.plinko_tab {
+    padding: 1rem!important;
+    background-color: #263742;
+    border-radius: 6px 0px 0px 6px;
+}
+
+.plinko> .ant-row {
+    box-shadow: rgba(25, 25, 25, 0.75) 0px 0px 10px;
+    background-color: rgb(18, 34, 46);
+    border-radius: 6px;
+}
+
+
+.plinko_tab .ant-tabs-bar {border-bottom: navajowhite;}
+
+
+.plinko_tab .ant-tabs-bar .ant-tabs-nav-scroll .ant-tabs-nav {
+    width: 100%;
+}
+
+.plinko_tab .ant-tabs-bar .ant-tabs-nav-scroll .ant-tabs-nav div.ant-tabs-ink-bar {display: none!important;}
+
+.plinko_tab.ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
+    font-weight: 600;
+    font-size: 0.8em;
+    touch-action: manipulation;
+    position: relative;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    line-height: 1.5;
+    color: rgb(183, 191, 214);
+    transition: background 300ms ease 0s, opacity 300ms ease 0s, transform 100ms ease 0s;
+    border-radius: 5px;
+    background: rgb(46, 68, 82);
+    padding: calc(0.5em + 2px) 1em;
+    margin-right: 0px;
+    width: 50%;
+}
+
+.plinko_tab.ant-tabs .ant-tabs-top-bar .ant-tabs-tab.ant-tabs-tab-active {
+    background-color: rgb(21, 33, 45);
+}
+.plinko_tab.ant-tabs .ant-tabs-top-bar .ant-tabs-tab.ant-tabs-tab-active:hover {
+    background-color: rgb(21, 33, 45);
+}
+
+.plinko_tab.ant-tabs .ant-tabs-nav div .ant-tabs-tab:first-child {
+    border-radius: 6px 0px 0px 6px;
+}
+
+.plinko_tab.ant-tabs .ant-tabs-nav div .ant-tabs-tab:last-child {
+    border-radius: 0px 6px 6px 0px;
+}
+
+.plinko_tab.ant-tabs .ant-tabs-top-bar .ant-tabs-tab:hover {
+    background-color: rgb(55, 82, 98);
+}
+
+.manual_tab label {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(183, 191, 214);
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0px;
+    margin: 0px 0px 0.25em;
+    transition: all 200ms ease-out 0s;
+}
+
+.total_bet .ant-select {
+    width: 100%;
+}
+
+.total_bet .ant-select .ant-select-selection {
+    background-color: transparent;
+    border: navajowhite;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.total_bet .ant-select .ant-select-arrow {
+    color: #ffffff;
+}
+
+.ant-select-dropdown-menu {
+    background-color: #15212d;
+}
+
+.ant-select-dropdown-menu .ant-select-dropdown-menu-item-selected {
+    background-color: #0000;
+    font-weight: 400;
+}
+
+.ant-select-dropdown-menu li.ant-select-dropdown-menu-item {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.ant-select-dropdown-menu .ant-select-dropdown-menu-item-active {
+    background-color:#007bff!important;
+}
+.total_bet .ant-select.ant-select-focused {
+    background-color: #15212d;
+}
