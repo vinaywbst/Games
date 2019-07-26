@@ -1,0 +1,100 @@
+.cardsection .card_wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cardsection .card_wrapper .card_side_a {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+}
+
+.cardsection .card_wrapper .card_side_a .counter {
+    width: 62px;
+    text-align: center;
+    background-color: #2e4452;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.cardsection .card_wrapper .card_side_b {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+}
+
+.cardsection .card_wrapper .card_side_b .counter {
+    width: 62px;
+    text-align: center;
+    background-color: #00f703;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.cardsection .card_wrapper .card_side_a .counter,.cardsection .card_wrapper .card_side_b .counter {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(-80px);
+}
+
+.cardsection .card_wrapper {
+    position: relative;
+    transform: translateY(100px);
+}
+
+.cardsection .card_wrapper .card_block > div {
+    max-width: 110px;
+}
+
+.cardsection .card_wrapper .card_block > div img {
+    width: 100%;
+}
+
+.cardsection .card_wrapper .card_block {
+    position: relative;
+}
+
+.cardsection .card_wrapper .card_side_a .card_block > div:nth-child(2) {
+    position: absolute;
+    transform: translate(-50%, -20px);
+    top: 0;
+    left: 0;
+    z-index:3;
+}
+
+.cardsection .card_wrapper .card_side_a .card_block > div:nth-child(1) {
+    z-index: 4;
+    position: relative;
+}
+
+.cardsection .card_wrapper .card_side_a .card_block > div:nth-child(3) {
+    position: absolute;
+    transform: translate(-100%, -40px);
+    top: 0;
+    left: 0;
+}
+
+.cardsection .card_wrapper .card_side_b .card_block> div:first-child {
+    position: relative;
+    z-index: 7;
+}
+
+.cardsection .card_wrapper .card_side_b .card_block> div:nth-child(3) {
+    position: absolute;
+    z-index: 2;
+    transform: translate(-100%, -40px);
+    top: 0;
+    left: 0;
+}
+
+.cardsection .card_wrapper .card_side_b .card_block> div:nth-child(2) {
+    position: absolute;
+    z-index: 3;
+    transform: translate(-50%, -20px);
+    top: 0;
+    left: 0;
+}

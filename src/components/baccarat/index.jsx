@@ -8,6 +8,7 @@ import undoimg from '../assets/images/undo.svg';
 import rotateimg from '../assets/images/rotate.svg';
 import cards from '../assets/images/cardimage.svg';
 import './index.css';
+import CardSection from './cardsection.jsx';
 const { TabPane } = Tabs;
 class Baccarat extends Component {
     constructor(props) {
@@ -85,7 +86,7 @@ class Baccarat extends Component {
                         </div>
                     </div>
                 <div className="baccarat_main">
-                    
+                   <CardSection/>
                 </div>
                 <div className="baccarat_footer">
                    <div className="wrapper">

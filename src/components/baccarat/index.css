@@ -271,7 +271,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 .baccarat .baccarat_tab {
-    min-height: 690px;
+    min-height: 600px;
 }
 
 .baccarat_footer .ant-col:last-child {
@@ -368,7 +368,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 690px;
+    min-height: 600px;
     max-height: max-content;
 }
 
@@ -505,3 +505,8 @@ span.icon_ {
     width: 80px;
 }
 
+.cardsection .card_wrapper .card_block > div {
+    border: 5px solid;
+    border-color: inherit;
+    border-radius: 10px;
+}
