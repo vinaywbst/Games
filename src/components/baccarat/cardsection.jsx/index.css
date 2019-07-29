@@ -7,7 +7,6 @@
 .cardsection .card_wrapper .card_side_a {
     display: flex;
     flex-flow: column;
-    position: relative;
 }
 
 .cardsection .card_wrapper .card_side_a .counter {
@@ -22,7 +21,6 @@
 .cardsection .card_wrapper .card_side_b {
     display: flex;
     flex-flow: column;
-    position: relative;
 }
 
 .cardsection .card_wrapper .card_side_b .counter {
@@ -34,67 +32,73 @@
     color: #000000;
 }
 
-.cardsection .card_wrapper .card_side_a .counter,.cardsection .card_wrapper .card_side_b .counter {
+.cardsection .card_wrapper .counter{
+    border: 0!important;
+    font-size: 1rem;
     position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateY(-80px);
+    top: -2px;
+    left: 100%;  
+    transform: translate(-100%, -100%);
+    transition-duration: 300ms;
+    transition-property: background, color, transform, opacity;
+    transition-timing-function: ease-out;
 }
-
-.cardsection .card_wrapper {
-    position: relative;
-    transform: translateY(100px);
-}
-
-.cardsection .card_wrapper .card_block > div {
-    max-width: 110px;
-}
-
 .cardsection .card_wrapper .card_block > div img {
     width: 100%;
+    height: auto;
+}
+.cardsection .card_wrapper .card_block > div{
+    max-width: 110px;
+}
+.baccarat_main .cardsection .card_wrapper {
+    padding-top: 35px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.cardsection .card_wrapper .card_block {
+.baccarat_main .cardsection .card_wrapper .card_side_a,.baccarat_main .cardsection .card_wrapper .card_side_b {
+    display: inline-flex;
+    width: 50%;
+    align-items: center;
+}
+.baccarat_main .cardsection .card_wrapper .card_block {
+    display: flex;
     position: relative;
+    align-items: flex-start;
+    margin-top: 1em;
+    font-size: 1.4em;
+    min-width: 5.6em;
+    min-height: 8.89em;
+    transition-duration: 300ms;
+    transition-property: width, height;
+}
+.cardsection .card_wrapper .card_block div.card1.active {
+    margin-top: 0em;
+    margin-left: 0em;
+    animation-delay: 0ms;
+    opacity: 1;
 }
 
-.cardsection .card_wrapper .card_side_a .card_block > div:nth-child(2) {
-    position: absolute;
-    transform: translate(-50%, -20px);
-    top: 0;
-    left: 0;
-    z-index:3;
+.cardsection .card_wrapper .card_block div.card2.active {
+    margin-top: 1em;
+    margin-left: -2.8em;
+    animation-delay: 100ms;
+    opacity: 1;
 }
 
-.cardsection .card_wrapper .card_side_a .card_block > div:nth-child(1) {
-    z-index: 4;
-    position: relative;
+.cardsection .card_wrapper .card_block div.card3.active {
+    margin-top: 2em;
+    margin-left: -2.8em;
+    animation-delay: 200ms;
+    opacity: 1;
 }
 
-.cardsection .card_wrapper .card_side_a .card_block > div:nth-child(3) {
-    position: absolute;
-    transform: translate(-100%, -40px);
-    top: 0;
-    left: 0;
+.cardsection .card_wrapper .card_block div.card1{
+    opacity: 0;
 }
-
-.cardsection .card_wrapper .card_side_b .card_block> div:first-child {
-    position: relative;
-    z-index: 7;
+.cardsection .card_wrapper .card_block div.card2{
+    opacity: 0;
 }
-
-.cardsection .card_wrapper .card_side_b .card_block> div:nth-child(3) {
-    position: absolute;
-    z-index: 2;
-    transform: translate(-100%, -40px);
-    top: 0;
-    left: 0;
-}
-
-.cardsection .card_wrapper .card_side_b .card_block> div:nth-child(2) {
-    position: absolute;
-    z-index: 3;
-    transform: translate(-50%, -20px);
-    top: 0;
-    left: 0;
+.cardsection .card_wrapper .card_block div.card3{
+    opacity: 0;
 }

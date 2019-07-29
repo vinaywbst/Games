@@ -34,7 +34,7 @@ class ManualTabToBet extends Component {
                 </div>
                 </>
                 <>
-                <Button className="bet-btn" block size={'large'}>Bet</Button>
+                <Button className="bet-btn" block size={'large'} onClick={this.props.handleBet.bind(this,'handleManualBet')}>Bet</Button>
                 </>
             </div>
          );
