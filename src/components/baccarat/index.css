@@ -437,8 +437,6 @@ span.icon_ {
     padding: 0;
 }
 .bet_notification_wrapper {
-    color: rgb(0, 228, 3);
-    box-shadow: rgb(0, 228, 3) 0px 0px 0px 4px;
     font-size: 1rem;
     text-align: center;
     position: absolute;
@@ -499,6 +497,7 @@ span.icon_ {
     transform: translate(-50%, -75%);
     font-size: 1.4em;
     padding: 10px 0px;
+    z-index: 1;
 }
 
 .baccarat .main_section .cards .image_cards {
@@ -509,4 +508,10 @@ span.icon_ {
     border: 5px solid;
     border-color: inherit;
     border-radius: 10px;
+}
+.bet_notification_inner span.text span {
+    font-size: 30px;
+    position: absolute;
+    transform: rotate(45deg);
+    font-weight:600;
 }

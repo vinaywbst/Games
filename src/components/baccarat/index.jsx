@@ -90,13 +90,13 @@ class Baccarat extends Component {
             betmultiply: 2,
             winammount: '0.00000000',
             sideA: {
-                counter: 3,
+                counter: '0',
                 card1: spades1,
                 card2: diamondQ,
                 card3: club3
             },
             sideB: {
-                counter: 10,
+                counter: '0',
                 card1: spades5,
                 card2: diamondK,
                 card3: club7
@@ -107,11 +107,16 @@ class Baccarat extends Component {
             sideBCard1: false,
             sideBCard2: false,
             sideBCard3: false,
+            sideAborderColor:'transparent',
+            sideBborderColor:'transparent',
+            notifyStatus:false,
+            notifyStatusColor:'#00e403'
         }
     }
     handleBet = (e) => {
         if (e === 'handleManualBet') {
-            this.showCards(1000, 1,"A")      
+            this.showCards(1000, 1,"A")
+            
         }
     }
 
@@ -127,7 +132,13 @@ class Baccarat extends Component {
                     this.showCards(1000, 2,"A").then(()=>{
                         this.showCards(1000,2,"B").then(()=>{
                             this.showCards(1000,3,"A").then(()=>{
-                                this.showCards(1000,3,"B")
+                                this.showCards(1000,3,"B").then(()=>{
+                                       setTimeout(() => {
+                                        this.setState({
+                                            sideAborderColor:'#00e403',
+                                            notifyStatus:true})
+                                       }, 300);
+                                })
                             })
                         })
                     })
@@ -242,14 +253,17 @@ class Baccarat extends Component {
                             </div>
 
                         </div>
-                        <div className="bet_notification_wrapper">
+                       {this.state.notifyStatus
+                         &&
+                         <div className="bet_notification_wrapper" style={{color:this.state.notifyStatusColor, boxShadow:`0px 0px 0px 4px ${this.state.notifyStatusColor}`}}>
                             <div className="bet_notification_inner">
-                                <span className="text">{this.state.betmultiply}x</span>
+                                <span className="text">{this.state.betmultiply}.00<span>+</span></span>
                                 <span className="win_amt">
                                     <span>{this.state.winammount}</span>
                                 </span>
                             </div>
                         </div>
+                       }
                     </Col>
                     <Col span={6} pull={18}>
                         <Tabs defaultActiveKey="manual" size={'small'} className="baccarat_tab">

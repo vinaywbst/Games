@@ -12,7 +12,7 @@ class CardSection extends Component {
          <div className="cardsection">
            <div className="card_wrapper">
                 <div className="card_side_a">                 
-                   <div className="card_block" style={{borderColor:'#808080'}}>
+                   <div className="card_block" style={{borderColor:this.props.sideAborderColor}}>
                    <div className={this.props.sideACard1 ? "card1 active" : 'card1'}>
                        <img src={this.props.sideA.card1} alt="card1"/>
                        </div>
@@ -22,13 +22,15 @@ class CardSection extends Component {
                       <div className={this.props.sideACard3 ? "card3 active" : 'card3'}>
                      <img src={this.props.sideA.card3} alt="card3"/>
                      </div>
-                     <div className="counter">
+                   {this.props.sideA.counter !=='' 
+                   &&
+                    <div className="counter">
                        <span className="label">{this.props.sideA.counter}</span>
-                   </div>
+                   </div>}
                    </div>
                 </div>
                 <div className="card_side_b">              
-                   <div className="card_block" style={{borderColor:'#00f703'}}>
+                   <div className="card_block" style={{borderColor:this.props.sideBborderColor}}>
                    <div className={this.props.sideBCard1 ? "card1 active" : 'card1'}>
                        <img src={this.props.sideB.card1} alt="card1"/>
                         </div>
@@ -39,9 +41,11 @@ class CardSection extends Component {
                          <div className={this.props.sideBCard3 ? "card3 active" : 'card3'}>
                        <img src={this.props.sideB.card3} alt="card3"/>
                          </div> 
+                         {this.props.sideB.counter !== ''
+                          &&
                          <div className="counter">
                        <span className="label">{this.props.sideB.counter}</span>
-                   </div>             
+                   </div>  }           
                    </div>
                 </div>
            </div>
