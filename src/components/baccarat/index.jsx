@@ -115,7 +115,7 @@ class Baccarat extends Component {
     }
     handleBet = (e) => {
         if (e === 'handleManualBet') {
-            this.showCards(1000, 1,"A")
+            this.showCards(1300, 1,"A")
             
         }
     }
@@ -128,11 +128,11 @@ class Baccarat extends Component {
                     [sideCard]: true
                 })
                 resolve(true)
-                this.showCards(1000, 1,"B").then(() => {
-                    this.showCards(1000, 2,"A").then(()=>{
-                        this.showCards(1000,2,"B").then(()=>{
-                            this.showCards(1000,3,"A").then(()=>{
-                                this.showCards(1000,3,"B").then(()=>{
+                this.showCards(1300, 1,"B").then(() => {
+                    this.showCards(1300, 2,"A").then(()=>{
+                        this.showCards(1300,2,"B").then(()=>{
+                            this.showCards(1300,3,"A").then(()=>{
+                                this.showCards(1300,3,"B").then(()=>{
                                        setTimeout(() => {
                                         this.setState({
                                             sideAborderColor:'#00e403',
