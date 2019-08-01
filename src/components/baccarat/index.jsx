@@ -107,45 +107,53 @@ class Baccarat extends Component {
             sideBCard1: false,
             sideBCard2: false,
             sideBCard3: false,
-            sideAborderColor:'transparent',
-            sideBborderColor:'transparent',
-            notifyStatus:false,
-            notifyStatusColor:'#00e403'
+            sideAborderColor: 'transparent',
+            sideBborderColor: 'transparent',
+            notifyStatus: false,
+            notifyStatusColor: '#00e403',
+            sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
+            sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
+            sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
+            sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
+            sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
+            sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
         }
     }
-    handleBet = (e) => {
+    handleBet = async (e) => {
         if (e === 'handleManualBet') {
-            this.showCards(1300, 1,"A")
-            
+            await this.showCards(300, 1, "A", 'translate(0%, 0%) rotateY(180deg)')
+            await this.showCards(300, 1, "B", 'translate(0%, 0%) rotateY(180deg)')
+            await this.showCards(300, 2, "A", 'translate(0%, 0%) rotateY(180deg)')
+            await this.showCards(300, 2, "B", 'translate(0%, 0%) rotateY(180deg)')
+            await this.showCards(300, 3, "A", 'translate(0%, 0%) rotateY(180deg)')
+            await this.showCards(300, 3, "B", 'translate(0%, 0%) rotateY(180deg)')
+            setTimeout(() => {
+                this.setState({
+                    sideAborderColor: '#00e403',
+                    notifyStatus: true
+                })
+            }, 500);
         }
     }
-
-    showCards = (time, val,data) => {
+    showCards = async (time, val, data, rotateval) => {
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                let sideCard=`side${data}Card${val}`
+            setTimeout(async () => {
+                let sideCard = `side${data}Card${val}`
+                let rotateState = `side${data}Card${val}transform`
                 this.setState({
-                    [sideCard]: true
-                })
-                resolve(true)
-                this.showCards(1300, 1,"B").then(() => {
-                    this.showCards(1300, 2,"A").then(()=>{
-                        this.showCards(1300,2,"B").then(()=>{
-                            this.showCards(1300,3,"A").then(()=>{
-                                this.showCards(1300,3,"B").then(()=>{
-                                       setTimeout(() => {
-                                        this.setState({
-                                            sideAborderColor:'#00e403',
-                                            notifyStatus:true})
-                                       }, 300);
-                                })
-                            })
+                    [sideCard]: true,
+                    [rotateState]: rotateval
+                }, () => {
+                    setTimeout(() => {
+                        this.setState({ [rotateState]: 'translate(0%, 0%) rotateY(0deg)' }, () => {
+                            resolve(true)
                         })
-                    })
+                    }, 300);
                 })
             }, time);
         })
     }
+
 
     handleSqueezeChecked = (e) => {
         if (e === 'manual') {
@@ -184,11 +192,11 @@ class Baccarat extends Component {
         for (var i = 0; i < this.state.playerCoinChildren; i += 1) {
             playercoinchildren.push(<CoinComponent onClickCoinValue={this.state.onClickPlayerCoinValue} key={i} number={i} />);
         };
-        for (var i = 0; i < this.state.tieCoinChildren; i += 1) {
-            tiecoinchildren.push(<CoinComponent onClickCoinValue={this.state.onClickTieCoinValue} key={i} number={i} />);
+        for (var j = 0; j < this.state.tieCoinChildren; j += 1) {
+            tiecoinchildren.push(<CoinComponent onClickCoinValue={this.state.onClickTieCoinValue} key={j} number={j} />);
         };
-        for (var i = 0; i < this.state.bankerCoinChildren; i += 1) {
-            bankercoinchildren.push(<CoinComponent onClickCoinValue={this.state.onClickBankerCoinValue} key={i} number={i} />);
+        for (var k = 0; k < this.state.bankerCoinChildren; k += 1) {
+            bankercoinchildren.push(<CoinComponent onClickCoinValue={this.state.onClickBankerCoinValue} key={k} number={k} />);
         };
         return (
             <div className="baccarat">
@@ -253,17 +261,17 @@ class Baccarat extends Component {
                             </div>
 
                         </div>
-                       {this.state.notifyStatus
-                         &&
-                         <div className="bet_notification_wrapper" style={{color:this.state.notifyStatusColor, boxShadow:`0px 0px 0px 4px ${this.state.notifyStatusColor}`}}>
-                            <div className="bet_notification_inner">
-                                <span className="text">{this.state.betmultiply}.00<span>+</span></span>
-                                <span className="win_amt">
-                                    <span>{this.state.winammount}</span>
-                                </span>
+                        {this.state.notifyStatus
+                            &&
+                            <div className="bet_notification_wrapper" style={{ color: this.state.notifyStatusColor, boxShadow: `0px 0px 0px 4px ${this.state.notifyStatusColor}` }}>
+                                <div className="bet_notification_inner">
+                                    <span className="text">{this.state.betmultiply}.00<span>+</span></span>
+                                    <span className="win_amt">
+                                        <span>{this.state.winammount}</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                       }
+                        }
                     </Col>
                     <Col span={6} pull={18}>
                         <Tabs defaultActiveKey="manual" size={'small'} className="baccarat_tab">

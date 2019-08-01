@@ -79,7 +79,6 @@
     position: relative;
     transition-duration: 300ms;
     transition-property: transform;
-    transform: translate(0%, 0%) rotateY(180deg);
     width:auto;
    
 }
@@ -90,7 +89,6 @@
     position: relative;
     transition-duration: 300ms;
     transition-property: transform;
-    transform: translate(0%, 0%) rotateY(180deg);
     width:auto;
    
 }
@@ -101,7 +99,6 @@
     position: relative;
     transition-duration: 300ms;
     transition-property: transform;
-    transform: translate(0%, 0%) rotateY(180deg);
     width:auto;
    
 }
@@ -111,7 +108,6 @@
     position: relative;
     transition-duration: 300ms;
     transition-property: transform;
-    transform: translate(0%, 0%) rotateY(180deg);
     width:auto;
    
 }
@@ -122,7 +118,6 @@
     position: relative;
     transition-duration: 300ms;
     transition-property: transform;
-    transform: translate(0%, 0%) rotateY(180deg);
     width:auto;
    
 }
@@ -133,7 +128,6 @@
     position: relative;
     transition-duration: 300ms;
     transition-property: transform;
-    transform: translate(0%, 0%) rotateY(180deg);
     width:auto;
    
 }
@@ -141,7 +135,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(858%, -127%) rotateY(180deg);
     width: 80px;
   
 }
@@ -149,7 +142,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(858%, -127%) rotateY(180deg);
     width: 80px;
   
 }
@@ -157,7 +149,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(858%, -127%) rotateY(180deg);
     width: 80px;
   
 }
@@ -165,7 +156,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(290%, -127%) rotateY(180deg);
     width: 80px;
   
 }
@@ -173,7 +163,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(290%, -127%) rotateY(180deg);
     width: 80px;
   
 }
@@ -181,7 +170,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(290%, -127%) rotateY(180deg);
     width: 80px;
   
 }
