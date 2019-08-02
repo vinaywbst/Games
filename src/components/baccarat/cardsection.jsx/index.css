@@ -198,3 +198,13 @@
     background-position: center;
     border: 4px solid white;
 }
+
+.active.playcard.allhc {
+    transform: translate(-40%, 29%) rotateY(0deg)!important;
+    opacity: 0;
+    transition: 250ms all!important;
+}
+.active.playcard.allhc .cardfront {
+    z-index: 2;
+    position: relative;
+}

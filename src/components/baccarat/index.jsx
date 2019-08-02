@@ -79,7 +79,6 @@ class Baccarat extends Component {
             manual: {
                 selectedchipvalue: 0,
                 squeezechecked: false,
-
             },
             auto: {
                 selectedchipvalue: 0,
@@ -117,10 +116,51 @@ class Baccarat extends Component {
             sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
             sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
             sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
+            cardHide:false
         }
     }
     handleBet = async (e) => {
-        if (e === 'handleManualBet') {
+       if (e === 'handleManualBet') {
+        if(this.state.notifyStatus){
+         setTimeout(() => {
+               this.setState({cardHide:true,  notifyStatus: false,
+               },()=>{
+            setTimeout(() => {
+                this.setState({                  
+                    sideAborderColor: 'transparent',
+                    sideBborderColor: 'transparent',              
+                    notifyStatusColor: '#00e403',  
+                    sideACard1: false,
+                    sideACard2: false,
+                    sideACard3: false,
+                    sideBCard1: false,
+                    sideBCard2: false,
+                    sideBCard3: false,
+                    sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
+                    sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
+                    sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
+                    sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
+                    sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
+                    sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
+                      
+                },()=>{
+                     this.handleBet('handleManualBet')
+                })
+            }, 300);
+               })
+         }, 50);
+           
+         
+        } else {
+            this.setState({
+                cardHide:false,
+                sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
+                sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
+                sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
+                sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
+                sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
+                sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
+            })
             await this.showCards(300, 1, "A", 'translate(0%, 0%) rotateY(180deg)')
             await this.showCards(300, 1, "B", 'translate(0%, 0%) rotateY(180deg)')
             await this.showCards(300, 2, "A", 'translate(0%, 0%) rotateY(180deg)')
@@ -134,7 +174,10 @@ class Baccarat extends Component {
                 })
             }, 500);
         }
+           
+        }
     }
+
     showCards = async (time, val, data, rotateval) => {
         return new Promise((resolve, reject) => {
             setTimeout(async () => {
