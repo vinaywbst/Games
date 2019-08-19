@@ -74,11 +74,10 @@ class SliderChips extends Component {
          }
     }
 
-
     render() { 
         const {TabPane} = Tabs;      
         return ( 
-            <Tabs defaultActiveKey="1" tabPosition={'top'} style={{ height: 220 }} className="slider_chips">
+            <Tabs onChange={this.props.handleChipClick} activeKey={this.props.activesliderchips.toString()} tabPosition={'top'} style={{ height: 220 }} className="slider_chips">
          
             {this.state.chips.map((el,i) => {
                return <TabPane tab={<div className="title" id={el.id} style={{backgroundImage:'url(' + chipdot + ')'}}><div className="chipvalue">{el.value}</div></div>} className="chip_" key={i+1}></TabPane>

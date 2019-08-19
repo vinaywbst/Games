@@ -515,3 +515,7 @@ span.icon_ {
     transform: rotate(45deg);
     font-weight:600;
 }
+.ant-btn.bet-btn[disabled],.ant-btn.bet-btn[disabled]:hover {
+    background-color: #138d23;
+    color: #2d2c2c;
+}

@@ -70,18 +70,23 @@ class Baccarat extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            totalaccountbal:0.00000010,
             playeramount: 0,
             tieamount: 0,
             bankeramount: 0,
             onClickPlayerCoinValue: 0,
             onClickTieCoinValue: 0,
             onClickBankerCoinValue: 0,
+            selectedchipvalue: 0.00000001,
+            coinval:1,
+            activesliderchips:1,
+            totalBetAmount:0,
             manual: {
-                selectedchipvalue: 0,
                 squeezechecked: false,
+                manual_tab_bet_button:false
             },
             auto: {
-                selectedchipvalue: 0,
+               
             },
             playerCoinChildren: 0,
             tieCoinChildren: 0,
@@ -120,61 +125,67 @@ class Baccarat extends Component {
         }
     }
     handleBet = async (e) => {
-       if (e === 'handleManualBet') {
+        let newState = this.state.manual
+        newState.manual_tab_bet_button = true
+       if (e === 'handleManualBet') {       
+        this.setState({manual:newState})
+
         if(this.state.notifyStatus){
-         setTimeout(() => {
-               this.setState({cardHide:true,  notifyStatus: false,
-               },()=>{
             setTimeout(() => {
-                this.setState({                  
-                    sideAborderColor: 'transparent',
-                    sideBborderColor: 'transparent',              
-                    notifyStatusColor: '#00e403',  
-                    sideACard1: false,
-                    sideACard2: false,
-                    sideACard3: false,
-                    sideBCard1: false,
-                    sideBCard2: false,
-                    sideBCard3: false,
-                    sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
-                    sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
-                    sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
-                    sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
-                    sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
-                    sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
-                      
-                },()=>{
-                     this.handleBet('handleManualBet')
-                })
-            }, 300);
+                  this.setState({cardHide:true,  notifyStatus: false,
+                  },()=>{
+               setTimeout(() => {
+                   this.setState({                  
+                       sideAborderColor: 'transparent',
+                       sideBborderColor: 'transparent',              
+                       notifyStatusColor: '#00e403',  
+                       sideACard1: false,
+                       sideACard2: false,
+                       sideACard3: false,
+                       sideBCard1: false,
+                       sideBCard2: false,
+                       sideBCard3: false,
+                       sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
+                       sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
+                       sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
+                       sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
+                       sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
+                       sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
+                         
+                   },()=>{
+                    this.handleBet('handleManualBet')
+                   })
+               }, 300);
+                  })
+            }, 50);
+              
+            
+           } else {
+               this.setState({
+                   cardHide:false,
+                   sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
+                   sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
+                   sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
+                   sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
+                   sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
+                   sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
                })
-         }, 50);
-           
-         
-        } else {
-            this.setState({
-                cardHide:false,
-                sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
-                sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
-                sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
-                sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
-                sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
-                sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
-            })
-            await this.showCards(300, 1, "A", 'translate(0%, 0%) rotateY(180deg)')
-            await this.showCards(300, 1, "B", 'translate(0%, 0%) rotateY(180deg)')
-            await this.showCards(300, 2, "A", 'translate(0%, 0%) rotateY(180deg)')
-            await this.showCards(300, 2, "B", 'translate(0%, 0%) rotateY(180deg)')
-            await this.showCards(300, 3, "A", 'translate(0%, 0%) rotateY(180deg)')
-            await this.showCards(300, 3, "B", 'translate(0%, 0%) rotateY(180deg)')
-            setTimeout(() => {
-                this.setState({
-                    sideAborderColor: '#00e403',
-                    notifyStatus: true
-                })
-            }, 500);
-        }
-           
+               await this.showCards(500, 1, "A", 'translate(0%, 0%) rotateY(180deg)')
+               await this.showCards(300, 1, "B", 'translate(0%, 0%) rotateY(180deg)')
+               await this.showCards(300, 2, "A", 'translate(0%, 0%) rotateY(180deg)')
+               await this.showCards(300, 2, "B", 'translate(0%, 0%) rotateY(180deg)')
+               await this.showCards(300, 3, "A", 'translate(0%, 0%) rotateY(180deg)')
+               await this.showCards(300, 3, "B", 'translate(0%, 0%) rotateY(180deg)')
+               setTimeout(() => {
+                newState.manual_tab_bet_button = false
+                   this.setState({
+                       sideAborderColor: '#00e403',
+                       notifyStatus: true,
+                       manual:newState
+                   })              
+               }, 500);
+           }
+          
         }
     }
 
@@ -214,19 +225,170 @@ class Baccarat extends Component {
     handleCoin = (e) => {
         if (e === 'playerclicked') {
             if (this.state.playerCoinChildren < 5) {
-                this.setState({ playerCoinChildren: this.state.playerCoinChildren + 1 })
+                this.setState({ playerCoinChildren: this.state.playerCoinChildren + 1})
             }
+            let ev = this.state.onClickPlayerCoinValue + this.state.coinval
+            let playeramount = this.state.playeramount + this.state.selectedchipvalue
+            let totalBetAmount = this.state.totalBetAmount + this.state.selectedchipvalue
+            this.setState({ onClickPlayerCoinValue:ev,playeramount,totalBetAmount })
         }
         if (e === 'tieclicked') {
             if (this.state.tieCoinChildren < 5) {
                 this.setState({ tieCoinChildren: this.state.tieCoinChildren + 1 })
             }
+            let ev = this.state.onClickTieCoinValue + this.state.coinval
+            let tieamount = this.state.tieamount + this.state.selectedchipvalue
+            let totalBetAmount = this.state.totalBetAmount + this.state.selectedchipvalue
+            this.setState({ onClickTieCoinValue:ev,tieamount,totalBetAmount })
         }
         if (e === 'bankerclicked') {
             if (this.state.bankerCoinChildren < 5) {
                 this.setState({ bankerCoinChildren: this.state.bankerCoinChildren + 1 })
             }
+            let ev = this.state.onClickBankerCoinValue + this.state.coinval
+            let bankeramount = this.state.bankeramount + this.state.selectedchipvalue
+            let totalBetAmount = this.state.totalBetAmount + this.state.selectedchipvalue
+            this.setState({ onClickBankerCoinValue:ev,bankeramount,totalBetAmount })
         }
+        if(e === 'half'){
+                let playeramount = (this.state.playeramount/2)
+                let tieamount = (this.state.tieamount/2)
+                let bankeramount = (this.state.bankeramount/2)
+                let onClickPlayerCoinValue = Math.floor((this.state.onClickPlayerCoinValue/2))
+                let onClickTieCoinValue = Math.floor((this.state.onClickTieCoinValue/2))
+                let onClickBankerCoinValue = Math.floor((this.state.onClickBankerCoinValue/2))
+                let totalBetAmount = (this.state.totalBetAmount/2)
+              
+              this.setState({
+                playeramount,
+                tieamount,
+                bankeramount,
+                onClickPlayerCoinValue,
+                onClickTieCoinValue,
+                onClickBankerCoinValue,
+                totalBetAmount
+              })
+              if(onClickPlayerCoinValue == 0){
+                    this.setState({ playerCoinChildren: 0,})
+              }
+              if(onClickTieCoinValue == 0){
+                this.setState({ tieCoinChildren: 0,})
+                    }   
+            if(onClickBankerCoinValue == 0){
+                this.setState({ bankerCoinChildren: 0,})
+                }
+
+        }
+        if(e === 'double'){
+
+        }
+
+       
+    }
+
+    handleChipClick=(e)=>{
+        this.setState({
+            activesliderchips:e
+        })
+       
+        if(e == 1){
+           this.setState({
+            selectedchipvalue:0.00000001,
+            coinval:1
+           })         
+        }
+        if(e == 2){
+            this.setState({
+             selectedchipvalue:0.00000010,
+             coinval:10
+            })         
+         }
+         if(e == 3){
+            this.setState({
+             selectedchipvalue:0.00000100,
+             coinval:100
+            })         
+         }
+         if(e == 4){
+            this.setState({
+             selectedchipvalue:0.00001000,
+             coinval:1000
+            })         
+         }
+         if(e == 5){
+            this.setState({
+             selectedchipvalue:0.00010000,
+             coinval:10000
+            })         
+         }
+         if(e == 6){
+            this.setState({
+             selectedchipvalue:0.00100000,
+             coinval:100000
+            })         
+         }
+         if(e == 7){
+            this.setState({
+             selectedchipvalue:0.01000000,
+             coinval:1000000
+            })         
+         }
+         if(e == 8){
+            this.setState({
+             selectedchipvalue:0.10000000,
+             coinval:10000000
+            })         
+         }
+         if(e == 9){
+            this.setState({
+             selectedchipvalue:1.00000000,
+             coinval:100000000
+            })         
+         }
+         if(e == 10){
+            this.setState({
+             selectedchipvalue:10.00000000,
+             coinval:1000000000
+            })         
+         }
+         if(e == 11){
+            this.setState({
+             selectedchipvalue:100.00000000,
+             coinval:10000000000
+            })         
+         }
+         if(e == 12){
+            this.setState({
+             selectedchipvalue:1000.00000000,
+             coinval:100000000000
+            })         
+         }
+         if(e == 13){
+            this.setState({
+             selectedchipvalue:10000.00000000,
+             coinval:1000000000000
+            })         
+         }
+        console.log('testchipclick',e)
+
+    }
+
+    clearBaccaratState=()=>{
+        this.setState({
+            onClickPlayerCoinValue: 0,
+            onClickTieCoinValue: 0,
+            onClickBankerCoinValue: 0,
+            selectedchipvalue: 0.00000001,
+            coinval:1,
+            playerCoinChildren: 0,
+            tieCoinChildren: 0,
+            bankerCoinChildren: 0,
+            activesliderchips:1,
+            totalBetAmount: 0.00000000,
+            playeramount: 0,
+            tieamount: 0,
+            bankeramount: 0,
+        })
     }
     render() {
         const playercoinchildren = []
@@ -262,7 +424,7 @@ class Baccarat extends Component {
                                             PLAYER
                        </div>
                                         <div className="amount">
-                                            {this.state.playeramount === 0 ? '0.00000000' : this.state.playeramount}
+                                            {this.state.playeramount.toFixed(8)}
                                         </div>
                                         <div className="coin_wrapper">
                                             {playercoinchildren}
@@ -275,7 +437,7 @@ class Baccarat extends Component {
                                             TIE
                        </div>
                                         <div className="amount">
-                                            {this.state.tieamount === 0 ? '0.00000000' : this.state.tieamount}
+                                            {this.state.tieamount.toFixed(8)}
                                         </div>
                                         <div className="coin_wrapper">
                                             {tiecoinchildren}
@@ -289,7 +451,7 @@ class Baccarat extends Component {
                                             BANKER
                        </div>
                                         <div className="amount">
-                                            {this.state.bankeramount === 0 ? '0.00000000' : this.state.bankeramount}
+                                            {this.state.bankeramount.toFixed(8)}
                                         </div>
                                         <div className="coin_wrapper">
                                             {bankercoinchildren}
@@ -300,7 +462,7 @@ class Baccarat extends Component {
 
                             <div className="btn_wrapper">
                                 <Button className="undo" type="link" size='large'><span className="icon_"><img src={undoimg} alt="undo" /></span> Undo</Button>
-                                <Button className="clear" type="link" size='large'>Clear <span className="icon_"><img src={rotateimg} alt="undo" /></span></Button>
+                                <Button className="clear" type="link" size='large' onClick={this.clearBaccaratState}>Clear <span className="icon_"><img src={rotateimg} alt="undo" /></span></Button>
                             </div>
 
                         </div>
@@ -319,10 +481,10 @@ class Baccarat extends Component {
                     <Col span={6} pull={18}>
                         <Tabs defaultActiveKey="manual" size={'small'} className="baccarat_tab">
                             <TabPane tab="Manual" key="manual">
-                                <ManualTabToBet {...this.state.manual} handlesqueezechecked={this.handleSqueezeChecked} handleBet={this.handleBet} />
+                                <ManualTabToBet {...this.state.manual} handlesqueezechecked={this.handleSqueezeChecked} handleBet={this.handleBet} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin}/>
                             </TabPane>
                             <TabPane tab="Auto" key="auto">
-                                <AutoTabToBet  {...this.state.auto} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} />
+                                <AutoTabToBet  {...this.state.auto} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin}/>
                             </TabPane>
                         </Tabs>
                     </Col>

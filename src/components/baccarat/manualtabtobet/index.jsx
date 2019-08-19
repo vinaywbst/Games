@@ -11,16 +11,16 @@ class ManualTabToBet extends Component {
         return ( 
             <div className="manual_tab">
                 <>
-                <label>Chip Value ({this.props.selectedchipvalue})</label>
-                <SliderChips/>
+                <label>Chip Value ({this.props.selectedchipvalue.toFixed(8)})</label>
+                <SliderChips {...this.props}/>
                 </>
                 <>
                 <label>Total Bet</label>
                 <div className="total_bet">
-                <Input defaultValue="0.00000000" size={'large'} readOnly={true}/>
-                <Button size={'large'}>½</Button>
+                <Input value={this.props.totalBetAmount.toFixed(8)} size={'large'} readOnly={true}/>
+                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'half')}>½</Button>
                 <Divider type={"vertical"} /> 
-                <Button size={'large'}>2×</Button>        
+                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'double')}>2×</Button>        
                 </div>
                 </>
                 <>
@@ -34,7 +34,7 @@ class ManualTabToBet extends Component {
                 </div>
                 </>
                 <>
-                <Button className="bet-btn" block size={'large'} onClick={this.props.handleBet.bind(this,'handleManualBet')}>Bet</Button>
+                <Button className="bet-btn" block size={'large'} disabled={this.props.manual_tab_bet_button} onClick={this.props.handleBet.bind(this,'handleManualBet')}>Bet</Button>
                 </>
             </div>
          );
