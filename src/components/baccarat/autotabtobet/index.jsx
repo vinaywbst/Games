@@ -10,13 +10,13 @@ class AutoTabToBet extends Component {
         return ( 
             <div className="auto_tab manual_tab">
                  <>
-                <label>Chip Value ({this.props.selectedchipvalue.toFixed(8)})</label>
+                <label>Chip Value ({this.props.selectedchipvalue})</label>
                 <SliderChips {...this.props}/>
                 </>
                 <>
                 <label>Total Bet</label>
                 <div className="total_bet">
-                <Input defaultValue="0.00000000" value={this.props.totalBetAmount.toFixed(8)} size={'large'} readOnly={true}/>
+                <Input value={this.props.totalBetAmount} size={'large'} readOnly={true}/>
                 <Button size={'large'} onClick={this.props.handleCoin.bind(this,'half')}>½</Button>
                 <Divider type={"vertical"} /> 
                 <Button size={'large'} onClick={this.props.handleCoin.bind(this,'double')}>2×</Button>        

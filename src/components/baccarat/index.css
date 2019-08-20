@@ -13,6 +13,7 @@ main.ant-layout-content .baccarat {
     box-shadow: rgba(25, 25, 25, 0.75) 0px 0px 10px;
     background-color: rgb(18, 34, 46);
     border-radius: 6px;
+    display: flex;
 }
 
 
@@ -461,6 +462,8 @@ span.icon_ {
 
 .bet_notification_inner span.win_amt {
     position: relative;
+    display: block;
+    min-width: 100px;
 }
 
 .bet_notification_inner span.win_amt span {
