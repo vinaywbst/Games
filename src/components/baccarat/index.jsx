@@ -83,10 +83,12 @@ class Baccarat extends Component {
             totalBetAmount:0,
             manual: {
                 squeezechecked: false,
-                manual_tab_bet_button:true
+                manual_tab_bet_button:true                
             },
             auto: {
-               
+                auto_tab_bet_button:true,
+                auto_tab_bet_button_text:"Start Autobet",
+                numberofbets:''
             },
             playerCoinChildren: 0,
             tieCoinChildren: 0,
@@ -121,61 +123,105 @@ class Baccarat extends Component {
             sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
             sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
             sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
-            cardHide:false
+            cardHide:false,
+            autobetstatus:true
         }
     }
-    handleBet = async (e) => {
+    handleAutobetInput=(e)=>{
+        let oldState={...this.state.auto}
+        oldState.numberofbets=e.target.value
+       this.setState({
+       auto:oldState
+       })
+     
+    }
+    setCardsToInitialState=()=>{
+        setTimeout(() => {
+            this.setState({cardHide:true,  notifyStatus: false,
+            },()=>{
+         setTimeout(() => {
+             this.setState({                  
+                 sideAborderColor: 'transparent',
+                 sideBborderColor: 'transparent',              
+                 notifyStatusColor: '#00e403',  
+                 sideACard1: false,
+                 sideACard2: false,
+                 sideACard3: false,
+                 sideBCard1: false,
+                 sideBCard2: false,
+                 sideBCard3: false,
+                 sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
+                 sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
+                 sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
+                 sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
+                 sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
+                 sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
+                   
+             })
+         }, 300);
+            })
+      }, 50);
+    }
+    startGame = async() =>{
+        
+        this.setState({
+            cardHide:false,
+            sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
+            sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
+            sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
+            sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
+            sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
+            sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
+        })
+        await this.showCards(500, 1, "A", 'translate(0%, 0%) rotateY(180deg)')
+        await this.showCards(300, 1, "B", 'translate(0%, 0%) rotateY(180deg)')
+        await this.showCards(300, 2, "A", 'translate(0%, 0%) rotateY(180deg)')
+        await this.showCards(300, 2, "B", 'translate(0%, 0%) rotateY(180deg)')
+        await this.showCards(300, 3, "A", 'translate(0%, 0%) rotateY(180deg)')
+        await this.showCards(300, 3, "B", 'translate(0%, 0%) rotateY(180deg)')       
+    }
+    handleAutoBetButton=(e)=>{
+        let newState = this.state.auto
+        newState.auto_tab_bet_button = false
+        this.setState({
+            sideAborderColor: '#00e403',
+            notifyStatus: true,
+            auto:newState
+        },()=>{
+         if(!this.state.autobetstatus){
+         let oldstateAuto = {...this.state.auto}
+         oldstateAuto.auto_tab_bet_button_text="Start Autobet"
+         this.setState({
+             auto:oldstateAuto
+         })
+         }
+         setTimeout(() => {                      
+            if(this.state.totalaccountbal > this.state.totalBetAmount && this.state.autobetstatus){
+             this.handleBet('handleautobet')
+            } 
+             if(!this.state.autobetstatus){
+                 this.setState({
+                  autobetstatus:true})
+             }
+                       
+         }, 500);
+        })
+    }
+    handleBet = async(e) => {
+       
+       if (e === 'handleManualBet') { 
         let newState = this.state.manual
-        newState.manual_tab_bet_button = true
-       if (e === 'handleManualBet') {       
+        newState.manual_tab_bet_button = true      
         this.setState({manual:newState})
 
         if(this.state.notifyStatus){
-            setTimeout(() => {
-                  this.setState({cardHide:true,  notifyStatus: false,
-                  },()=>{
-               setTimeout(() => {
-                   this.setState({                  
-                       sideAborderColor: 'transparent',
-                       sideBborderColor: 'transparent',              
-                       notifyStatusColor: '#00e403',  
-                       sideACard1: false,
-                       sideACard2: false,
-                       sideACard3: false,
-                       sideBCard1: false,
-                       sideBCard2: false,
-                       sideBCard3: false,
-                       sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
-                       sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
-                       sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
-                       sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
-                       sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
-                       sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
-                         
-                   },()=>{
-                    this.handleBet('handleManualBet')
-                   })
-               }, 300);
-                  })
-            }, 50);
-              
-            
+         await this.setCardsToInitialState()
+         setTimeout(() => {
+            this.handleBet('handleManualBet')
+         }, 400);
+         
            } else {
-               this.setState({
-                   cardHide:false,
-                   sideACard1transform: 'translate(858%, -127%) rotateY(180deg)',
-                   sideACard2transform: 'translate(858%, -127%) rotateY(180deg)',
-                   sideACard3transform: 'translate(858%, -127%) rotateY(180deg)',
-                   sideBCard1transform: 'translate(290%, -127%) rotateY(180deg)',
-                   sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
-                   sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
-               })
-               await this.showCards(500, 1, "A", 'translate(0%, 0%) rotateY(180deg)')
-               await this.showCards(300, 1, "B", 'translate(0%, 0%) rotateY(180deg)')
-               await this.showCards(300, 2, "A", 'translate(0%, 0%) rotateY(180deg)')
-               await this.showCards(300, 2, "B", 'translate(0%, 0%) rotateY(180deg)')
-               await this.showCards(300, 3, "A", 'translate(0%, 0%) rotateY(180deg)')
-               await this.showCards(300, 3, "B", 'translate(0%, 0%) rotateY(180deg)')
+               await this.startGame()
                setTimeout(() => {
                 newState.manual_tab_bet_button = false
                    this.setState({
@@ -186,6 +232,64 @@ class Baccarat extends Component {
                }, 500);
            }
           
+        }
+
+        if(e==="handleautobet" && this.state.autobetstatus){
+            let newState = this.state.auto
+        newState.auto_tab_bet_button = true  
+        newState.auto_tab_bet_button_text="Stop Autobet"    
+        this.setState({auto:newState})
+        if(this.state.notifyStatus){
+            if(this.state.auto.numberofbets !==0){
+                await this.setCardsToInitialState()            
+            }   
+            if(this.state.auto.numberofbets === 0){
+                let autost = {...this.state.auto}
+                autost.auto_tab_bet_button_text="Start Autobet"
+                autost.auto_tab_bet_button=false
+                this.setState({auto:autost})
+            } 
+           
+         setTimeout(() => {
+               if(this.state.auto.numberofbets !==0){
+                this.handleBet('handleautobet')
+               }else{
+                let autost = {...this.state.auto}
+                autost.numberofbets=''
+                this.setState({auto:autost})
+               }
+                }, 700);
+         
+           } else {
+               if(this.state.auto.numberofbets ===''){
+                await this.startGame()
+                setTimeout(() => {     
+                 this.handleAutoBetButton()
+                }, 500);
+               }
+               if(this.state.auto.numberofbets > 0){
+                   let oldAuto = {...this.state.auto}
+                   oldAuto.numberofbets=this.state.auto.numberofbets-1
+                   this.setState({
+                       auto:oldAuto
+                   })
+                await this.startGame()
+                setTimeout(() => {     
+                 this.handleAutoBetButton()
+                }, 500);
+               }
+             
+           }
+
+        }
+
+        if(e === "stopAutobet"){
+            let oldstateAuto = {...this.state.auto}
+            oldstateAuto.auto_tab_bet_button_text="Finishing Bet"
+            this.setState({
+                auto:oldstateAuto,
+                autobetstatus:false
+            })
         }
     }
 
@@ -291,7 +395,6 @@ class Baccarat extends Component {
                 let onClickTieCoinValue = Math.floor((this.state.onClickTieCoinValue/2))
                 let onClickBankerCoinValue = Math.floor((this.state.onClickBankerCoinValue/2))
                 let totalBetAmount = playeramount + tieamount + bankeramount
-                console.log('totalBetAmount',totalBetAmount , 'playeramount',playeramount,'tieamount',tieamount,'bankeramount',bankeramount)
               
               this.setState({
                 playeramount,
@@ -355,15 +458,20 @@ class Baccarat extends Component {
             console.log('handleBetButton')
             setTimeout(() => {
                 let manualoldstate = {...this.state.manual}
+                let autooldstate = {...this.state.auto}
                 if(this.state.totalBetAmount !== 0){
                     manualoldstate.manual_tab_bet_button=false
+                    autooldstate.auto_tab_bet_button=false
                     this.setState({
-                    manual:manualoldstate
+                    manual:manualoldstate,
+                    auto:autooldstate
                     })
                 }else{
                     manualoldstate.manual_tab_bet_button=true
+                    autooldstate.auto_tab_bet_button=true
                     this.setState({
-                    manual:manualoldstate
+                    manual:manualoldstate,
+                    auto:autooldstate
                     })
                 }
             }, 10);
@@ -508,7 +616,7 @@ class Baccarat extends Component {
                                     <Button className="custom_bet_btn" onClick={this.handleCoin.bind(this, 'playerclicked')}>
                                         <div className="player">
                                             PLAYER
-                       </div>
+                                            </div>
                                         <div className="amount">
                                             {this.state.playeramount.toFixed(2)}
                                         </div>
@@ -570,7 +678,7 @@ class Baccarat extends Component {
                                 <ManualTabToBet {...this.state.manual} handlesqueezechecked={this.handleSqueezeChecked} handleBet={this.handleBet} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin}/>
                             </TabPane>
                             <TabPane tab="Auto" key="auto">
-                                <AutoTabToBet  {...this.state.auto} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin}/>
+                                <AutoTabToBet  {...this.state.auto} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin} handleBet={this.handleBet} handleAutobetInput={this.handleAutobetInput}/>
                             </TabPane>
                         </Tabs>
                     </Col>

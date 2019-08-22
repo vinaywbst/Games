@@ -25,7 +25,7 @@ class AutoTabToBet extends Component {
                 <>
                 <label>Number of Bets</label>
                 <div className="total_bet">
-                <Input defaultValue="0" size={'large'} type='number'/>       
+                <Input onChange={this.props.handleAutobetInput} value={this.props.numberofbets} size={'large'} type='number'/>       
                 </div>
                 </>
                 <>
@@ -61,7 +61,26 @@ class AutoTabToBet extends Component {
                 </div>
                 </>
                 <>
-                <Button className="bet-btn" block size={'large'}>Start Autobet</Button>
+                {this.props.auto_tab_bet_button_text === "Start Autobet" && <Button 
+                className="bet-btn" 
+                block 
+                size={'large'} 
+                disabled={this.props.auto_tab_bet_button} 
+                onClick={this.props.handleBet.bind(this,'handleautobet')}
+                >{this.props.auto_tab_bet_button_text}</Button>}
+                {this.props.auto_tab_bet_button_text === "Stop Autobet" && <Button 
+                className="bet-btn" 
+                block 
+                size={'large'}
+                onClick={this.props.handleBet.bind(this,'stopAutobet')}
+                >{this.props.auto_tab_bet_button_text}</Button>}
+                {this.props.auto_tab_bet_button_text === "Finishing Bet" && <Button 
+                className="bet-btn" 
+                block 
+                size={'large'}
+                disabled={true}
+                >{this.props.auto_tab_bet_button_text}</Button>}
+                
                 </>
             </div>
          );
