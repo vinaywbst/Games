@@ -70,7 +70,7 @@ class Baccarat extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            totalaccountbal:10,
+            totalaccountbal:100000000000000000000,
             playeramount: 0,
             tieamount: 0,
             bankeramount: 0,
@@ -88,7 +88,7 @@ class Baccarat extends Component {
             auto: {
                 auto_tab_bet_button:true,
                 auto_tab_bet_button_text:"Start Autobet",
-                numberofbets:''
+                numberofbets:'0'
             },
             playerCoinChildren: 0,
             tieCoinChildren: 0,
@@ -124,7 +124,8 @@ class Baccarat extends Component {
             sideBCard2transform: 'translate(290%, -127%) rotateY(180deg)',
             sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
             cardHide:false,
-            autobetstatus:true
+            autobetstatus:true,
+            gameRunning:false
         }
     }
     handleAutobetInput=(e)=>{
@@ -208,7 +209,7 @@ class Baccarat extends Component {
         })
     }
     handleBet = async(e) => {
-       
+       this.setState({gameRunning:true})
        if (e === 'handleManualBet') { 
         let newState = this.state.manual
         newState.manual_tab_bet_button = true      
@@ -227,7 +228,8 @@ class Baccarat extends Component {
                    this.setState({
                        sideAborderColor: '#00e403',
                        notifyStatus: true,
-                       manual:newState
+                       manual:newState,
+                       gameRunning:false
                    })              
                }, 500);
            }
@@ -247,7 +249,7 @@ class Baccarat extends Component {
                 let autost = {...this.state.auto}
                 autost.auto_tab_bet_button_text="Start Autobet"
                 autost.auto_tab_bet_button=false
-                this.setState({auto:autost})
+                this.setState({auto:autost,  gameRunning:false})
             } 
            
          setTimeout(() => {
@@ -255,13 +257,13 @@ class Baccarat extends Component {
                 this.handleBet('handleautobet')
                }else{
                 let autost = {...this.state.auto}
-                autost.numberofbets=''
-                this.setState({auto:autost})
+                autost.numberofbets='0'
+                this.setState({auto:autost, gameRunning:false})
                }
                 }, 700);
          
            } else {
-               if(this.state.auto.numberofbets ===''){
+               if(this.state.auto.numberofbets ==='0'){
                 await this.startGame()
                 setTimeout(() => {     
                  this.handleAutoBetButton()
@@ -282,13 +284,18 @@ class Baccarat extends Component {
            }
 
         }
+        if(e==="handleautobet" && !this.state.autobetstatus){
+            this.setState({
+                gameRunning:false
+            })
+        }
 
         if(e === "stopAutobet"){
             let oldstateAuto = {...this.state.auto}
             oldstateAuto.auto_tab_bet_button_text="Finishing Bet"
             this.setState({
                 auto:oldstateAuto,
-                autobetstatus:false
+                autobetstatus:false                
             })
         }
     }
@@ -613,7 +620,7 @@ class Baccarat extends Component {
                             <div className="wrapper">
                                 <div className="text">Place your bets</div>
                                 <div className="inner_col">
-                                    <Button className="custom_bet_btn" onClick={this.handleCoin.bind(this, 'playerclicked')}>
+                                    <Button className="custom_bet_btn" disabled={this.state.gameRunning} onClick={this.handleCoin.bind(this, 'playerclicked')}>
                                         <div className="player">
                                             PLAYER
                                             </div>
@@ -626,10 +633,10 @@ class Baccarat extends Component {
                                     </Button>
                                 </div>
                                 <div className="inner_col">
-                                    <Button className="custom_bet_btn" onClick={this.handleCoin.bind(this, 'tieclicked')}>
+                                    <Button className="custom_bet_btn" disabled={this.state.gameRunning} onClick={this.handleCoin.bind(this, 'tieclicked')}>
                                         <div className="player">
                                             TIE
-                       </div>
+                                        </div>
                                         <div className="amount">
                                             {this.state.tieamount.toFixed(2)}
                                         </div>
@@ -640,7 +647,7 @@ class Baccarat extends Component {
                                 </div>
 
                                 <div className="inner_col">
-                                    <Button className="custom_bet_btn" onClick={this.handleCoin.bind(this, 'bankerclicked')}>
+                                    <Button className="custom_bet_btn" onClick={this.handleCoin.bind(this, 'bankerclicked')} disabled={this.state.gameRunning}>
                                         <div className="player">
                                             BANKER
                        </div>
@@ -655,8 +662,8 @@ class Baccarat extends Component {
                             </div>
 
                             <div className="btn_wrapper">
-                                <Button className="undo" type="link" size='large'><span className="icon_"><img src={undoimg} alt="undo" /></span> Undo</Button>
-                                <Button className="clear" type="link" size='large' onClick={this.clearBaccaratState}>Clear <span className="icon_"><img src={rotateimg} alt="undo" /></span></Button>
+                                <Button className="undo" type="link" size='large' disabled={this.state.gameRunning}><span className="icon_"><img src={undoimg} alt="undo" /></span> Undo</Button>
+                                <Button className="clear" type="link" size='large' disabled={this.state.gameRunning} onClick={this.clearBaccaratState}>Clear <span className="icon_"><img src={rotateimg} alt="undo" /></span></Button>
                             </div>
 
                         </div>
@@ -674,11 +681,11 @@ class Baccarat extends Component {
                     </Col>
                     <Col span={6} pull={18}>
                         <Tabs defaultActiveKey="manual" size={'small'} className="baccarat_tab">
-                            <TabPane tab="Manual" key="manual">
-                                <ManualTabToBet {...this.state.manual} handlesqueezechecked={this.handleSqueezeChecked} handleBet={this.handleBet} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin}/>
+                            <TabPane tab="Manual" key="manual" disabled={this.state.gameRunning}>
+                                <ManualTabToBet {...this.state.manual} handlesqueezechecked={this.handleSqueezeChecked} handleBet={this.handleBet} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin} gameRunning={this.state.gameRunning}/>
                             </TabPane>
-                            <TabPane tab="Auto" key="auto">
-                                <AutoTabToBet  {...this.state.auto} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin} handleBet={this.handleBet} handleAutobetInput={this.handleAutobetInput}/>
+                            <TabPane tab="Auto" key="auto" disabled={this.state.gameRunning}>
+                                <AutoTabToBet  {...this.state.auto} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} selectedchipvalue={this.state.selectedchipvalue} handleChipClick={this.handleChipClick} activesliderchips={this.state.activesliderchips} totalBetAmount={this.state.totalBetAmount} handleCoin={this.handleCoin} handleBet={this.handleBet} handleAutobetInput={this.handleAutobetInput} gameRunning={this.state.gameRunning}/>
                             </TabPane>
                         </Tabs>
                     </Col>

@@ -10,54 +10,54 @@ class AutoTabToBet extends Component {
         return ( 
             <div className="auto_tab manual_tab">
                  <>
-                <label>Chip Value ({this.props.selectedchipvalue})</label>
+                <label>Chip Value ({this.props.selectedchipvalue}) {this.props.gameRunning ? 'active' : 'inactive'}</label>
                 <SliderChips {...this.props}/>
                 </>
                 <>
                 <label>Total Bet</label>
                 <div className="total_bet">
                 <Input value={this.props.totalBetAmount} size={'large'} readOnly={true}/>
-                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'half')}>½</Button>
+                <Button disabled={this.props.gameRunning} size={'large'} onClick={this.props.handleCoin.bind(this,'half')}>½</Button>
                 <Divider type={"vertical"} /> 
-                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'double')}>2×</Button>        
+                <Button disabled={this.props.gameRunning} size={'large'} onClick={this.props.handleCoin.bind(this,'double')}>2×</Button>        
                 </div>
                 </>
                 <>
                 <label>Number of Bets</label>
                 <div className="total_bet">
-                <Input onChange={this.props.handleAutobetInput} value={this.props.numberofbets} size={'large'} type='number'/>       
+                <Input readOnly={this.props.gameRunning} onChange={this.props.handleAutobetInput} value={this.props.numberofbets} size={'large'} type='number'/>       
                 </div>
                 </>
                 <>
                 <label>On Win</label>
                 <div className="total_bet">
                 <Radio.Group onChange={this.props.on_change_win} defaultValue="reset">
-                    <Radio.Button value="reset">Reset</Radio.Button>
-                    <Radio.Button value="increase by">Increase by:</Radio.Button>
+                    <Radio.Button disabled={this.props.gameRunning} value="reset">Reset</Radio.Button>
+                    <Radio.Button disabled={this.props.gameRunning} value="increase by">Increase by:</Radio.Button>
                 </Radio.Group>
-                <Input defaultValue="0" size={'large'} type='number' addonAfter={'%'}/>       
+                <Input readOnly={this.props.gameRunning} defaultValue="0" size={'large'} type='number' addonAfter={'%'}/>       
                 </div>
                 </>
                 <>
                 <label>On Loss</label>
                 <div className="total_bet">
                 <Radio.Group onChange={this.props.on_change_loss} defaultValue="reset">
-                    <Radio.Button value="reset">Reset</Radio.Button>
-                    <Radio.Button value="increase by">Increase by:</Radio.Button>
+                    <Radio.Button disabled={this.props.gameRunning} value="reset">Reset</Radio.Button>
+                    <Radio.Button disabled={this.props.gameRunning} value="increase by">Increase by:</Radio.Button>
                 </Radio.Group>
-                <Input defaultValue="0" size={'large'} type='number' addonAfter={'%'}/>       
+                <Input defaultValue="0" readOnly={this.props.gameRunning} size={'large'} type='number' addonAfter={'%'}/>       
                 </div>
                 </>
                 <>
                 <label>Stop on Profit</label>
                 <div className="total_bet">
-                <Input defaultValue="0.0000000" size={'large'} type='number'/>       
+                <Input readOnly={this.props.gameRunning} defaultValue="0.0000000" size={'large'} type='number'/>       
                 </div>
                 </>
                 <>
                 <label>Stop on Loss</label>
                 <div className="total_bet">
-                <Input defaultValue="0.0000000" size={'large'} type='number'/>       
+                <Input readOnly={this.props.gameRunning} defaultValue="0.0000000" size={'large'} type='number'/>       
                 </div>
                 </>
                 <>

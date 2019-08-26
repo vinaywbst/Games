@@ -18,15 +18,16 @@ class ManualTabToBet extends Component {
                 <label>Total Bet</label>
                 <div className="total_bet">
                 <Input value={this.props.totalBetAmount} size={'large'} readOnly={true}/>
-                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'half')}>½</Button>
+                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'half')} disabled={this.props.gameRunning}>½</Button>
                 <Divider type={"vertical"} /> 
-                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'double')}>2×</Button>        
+                <Button size={'large'} onClick={this.props.handleCoin.bind(this,'double')} disabled={this.props.gameRunning}>2×</Button>        
                 </div>
                 </>
                 <>
                 <div className="squeeze">
                 <Checkbox
                 checked={this.props.squeezechecked}
+                disabled={this.props.gameRunning}
                 onChange={this.props.handlesqueezechecked.bind(this,'manual')}
                      >
                 Enable Squeeze

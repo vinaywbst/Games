@@ -80,7 +80,7 @@ class SliderChips extends Component {
             <Tabs onChange={this.props.handleChipClick} activeKey={this.props.activesliderchips.toString()} tabPosition={'top'} style={{ height: 220 }} className="slider_chips">
          
             {this.state.chips.map((el,i) => {
-               return <TabPane tab={<div className="title" id={el.id} style={{backgroundImage:'url(' + chipdot + ')'}}><div className="chipvalue">{el.value}</div></div>} className="chip_" key={i+1}></TabPane>
+               return <TabPane disabled={this.props.gameRunning} tab={<div className="title" id={el.id} style={{backgroundImage:'url(' + chipdot + ')'}}><div className="chipvalue">{el.value}</div></div>} className="chip_" key={i+1}></TabPane>
                 
              
             })}
