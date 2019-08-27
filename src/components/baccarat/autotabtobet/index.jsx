@@ -66,7 +66,7 @@ class AutoTabToBet extends Component {
                 block 
                 size={'large'} 
                 disabled={this.props.auto_tab_bet_button} 
-                onClick={this.props.handleBet.bind(this,'handleautobet')}
+                onClick={this.props.handleBet.bind(this,'handleautobet','startgame')}
                 >{this.props.auto_tab_bet_button_text}</Button>}
                 {this.props.auto_tab_bet_button_text === "Stop Autobet" && <Button 
                 className="bet-btn" 

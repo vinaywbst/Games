@@ -141,6 +141,7 @@ class Baccarat extends Component {
             this.setState({cardHide:true,  notifyStatus: false,
             },()=>{
          setTimeout(() => {
+            console.log('setCardsToInitialState2')
              this.setState({                  
                  sideAborderColor: 'transparent',
                  sideBborderColor: 'transparent',              
@@ -159,6 +160,18 @@ class Baccarat extends Component {
                  sideBCard3transform: 'translate(290%, -127%) rotateY(180deg)',
                    
              })
+           setTimeout(() => {
+               console.log('reset')
+            if(this.state.auto.auto_tab_bet_button_text==="Finishing Bet"){
+                let oldst={...this.state.auto}
+                oldst.auto_tab_bet_button_text="Start Autobet"
+                oldst.auto_tab_bet_button=false
+                this.setState({
+                    auto:oldst
+                })
+               
+             }
+           }, 200);
          }, 300);
             })
       }, 50);
@@ -201,14 +214,38 @@ class Baccarat extends Component {
              this.handleBet('handleautobet')
             } 
              if(!this.state.autobetstatus){
+                let oldstateAuto = {...this.state.auto}
+                oldstateAuto.auto_tab_bet_button_text="Start Autobet"
                  this.setState({
-                  autobetstatus:true})
+                  autobetstatus:true,
+                  gameRunning:false,
+                  auto:oldstateAuto})
+                  console.log('step2')
              }
                        
          }, 500);
         })
     }
-    handleBet = async(e) => {
+    handleBet = async(e,bt) => {
+       if(bt==='startgame' && !this.state.autobetstatus){
+           this.setState({
+               autobetstatus:true
+           },()=>{
+            this.handleBet('handleautobet')
+           })
+          
+       }
+       if(bt==='startgame' && this.state.auto.numberofbets === 0){
+           let kt = {...this.state.auto}
+           kt.numberofbets='0'
+        this.setState({
+            auto:kt,
+            autobetstatus:true
+        },()=>{
+         this.handleBet('handleautobet')
+        })
+       
+    }
        this.setState({gameRunning:true})
        if (e === 'handleManualBet') { 
         let newState = this.state.manual
@@ -235,8 +272,8 @@ class Baccarat extends Component {
            }
           
         }
-
         if(e==="handleautobet" && this.state.autobetstatus){
+            console.log('resets')
             let newState = this.state.auto
         newState.auto_tab_bet_button = true  
         newState.auto_tab_bet_button_text="Stop Autobet"    
