@@ -13,6 +13,7 @@ main.ant-layout-content .plinko {
     box-shadow: rgba(25, 25, 25, 0.75) 0px 0px 10px;
     background-color: rgb(18, 34, 46);
     border-radius: 6px;
+    display: flex;
 }
 
 
@@ -110,4 +111,19 @@ main.ant-layout-content .plinko {
 }
 .total_bet .ant-select.ant-select-focused {
     background-color: #15212d;
+}
+
+
+div#techvr canvas{
+    max-width: 100%;
+    height: auto;
+}
+
+div#techvr {
+    display: flex;
+    justify-content: center;
+}
+
+.plinko_tab_sidepanel {
+    display: flex!important;
 }

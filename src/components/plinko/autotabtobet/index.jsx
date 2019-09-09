@@ -31,7 +31,7 @@ class AutoTabToBet extends Component {
                 <>
                 <label>Rows</label>
                 <div className="total_bet">
-                <Select defaultValue="8" className="custom-select">
+                <Select defaultValue="8" className="custom-select" onChange={this.props.changeRows.bind(this)}>
                 <Option value="8">8</Option>
                 <Option value="9">9</Option>
                 <Option value="10">10</Option>
@@ -52,7 +52,7 @@ class AutoTabToBet extends Component {
                 </>
                
                 <>
-                <Button className="bet-btn" block size={'large'}>Start Autobet</Button>
+                <Button className="bet-btn" block size={'large'} onClick={this.props.dropChips.bind(this,'autobet')}>Start Autobet</Button>
                 </>
             </div>
          );
