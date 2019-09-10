@@ -8,7 +8,7 @@ export const PLINKO = {
   PLINKO.DIAMETER = PLINKO.RADIUS * 2;
   
   export const PARTICLE = {
-    DENSITY: 1/10.,
+    DENSITY: 1/10,
     FRICTION: 0.9,
     RESTITUTION: 0.8,
     RADIUS: 7,
