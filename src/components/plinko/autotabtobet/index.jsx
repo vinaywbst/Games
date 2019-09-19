@@ -31,7 +31,7 @@ class AutoTabToBet extends Component {
                 <>
                 <label>Rows</label>
                 <div className="total_bet">
-                <Select defaultValue="8" className="custom-select" onChange={this.props.changeRows.bind(this)}>
+                <Select defaultValue="16" className="custom-select" onChange={this.props.changeRows.bind(this)}>
                 <Option value="8">8</Option>
                 <Option value="9">9</Option>
                 <Option value="10">10</Option>
