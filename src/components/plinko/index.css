@@ -135,7 +135,7 @@ div#techvr {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
-    margin-top: -30px;
+    /* margin-top: -30px; */
 }
 .pegs_wrapper {
     display: grid;

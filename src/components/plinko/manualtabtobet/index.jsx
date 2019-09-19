@@ -36,16 +36,16 @@ class ManualTabToBet extends Component {
                 <>
                 <label>Rows</label>
                 <div className="total_bet">
-                <Select defaultValue="16" className="custom-select" onChange={this.props.changeRows.bind(this)}>
-                <Option value="8">8</Option>
-                <Option value="9">9</Option>
-                <Option value="10">10</Option>
-                <Option value="11">11</Option>
-                <Option value="12">12</Option>
-                <Option value="13">13</Option>
-                <Option value="14">14</Option>
-                <Option value="15">15</Option>
-                <Option value="16">16</Option>
+                <Select defaultValue={16} className="custom-select" onChange={this.props.changeRows.bind(this)}>
+                <Option value={8}>8</Option>
+                <Option value={9}>9</Option>
+                <Option value={10}>10</Option>
+                <Option value={11}>11</Option>
+                <Option value={12}>12</Option>
+                <Option value={13}>13</Option>
+                <Option value={14}>14</Option>
+                <Option value={15}>15</Option>
+                <Option value={16}>16</Option>
                 </Select>        
                 </div>
                 </>
