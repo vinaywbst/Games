@@ -52,7 +52,7 @@ class AutoTabToBet extends Component {
                 </>
                
                 <>
-                <Button className="bet-btn" block size={'large'} onClick={this.props.dropChips.bind(this,'autobet')}>Start Autobet</Button>
+                <Button className="bet-btn" block size={'large'} disabled={this.props.betdisabeled} onClick={this.props.dropChips.bind(this,'autobet')}>Start Autobet</Button>
                 </>
             </div>
          );

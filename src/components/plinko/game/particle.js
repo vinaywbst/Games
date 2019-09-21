@@ -6,8 +6,8 @@ export default class Particle extends GameObject {
   static count = 0;
   static fillStyles = ['solid'];
 
-  constructor({ id, x, y }) {
-    super({ id, x, y });
+  constructor({ id, x, y, r }) {
+    super({ id, x, y, r});
     this.type = 'particle';  
     this.diameter = PARTICLE.DIAMETER;
     this.fillStyle = Particle.fillStyles[Math.floor(Math.random() * Particle.fillStyles.length)];
@@ -23,7 +23,7 @@ export default class Particle extends GameObject {
       friction: PARTICLE.FRICTION
     }
 
-    this.body = Bodies.circle(this.x, this.y, PARTICLE.RADIUS, options);
+    this.body = Bodies.circle(this.x, this.y, this.r, options);
     this.area = this.body.area;
     Body.setDensity(this.body, PARTICLE.DENSITY)
     this.body.label = this.type;

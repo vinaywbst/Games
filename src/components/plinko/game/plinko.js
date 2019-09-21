@@ -2,8 +2,8 @@ import { Body, Bodies } from 'matter-js';
 import {PLINKO} from '../constants/bodies';
 import GameObject from './GameObject';
 export default class Plinko extends GameObject {
-  constructor({ id, x, y }) {
-    super({ id, x, y });
+  constructor({ id, x, y, r }) {
+    super({ id, x, y, r });
     this.type = 'plinko';
     this.createPhysics();
     this.body.parentObject = this;
@@ -14,7 +14,7 @@ export default class Plinko extends GameObject {
       restitution: PLINKO.RESTITUTION,
     }
 
-    this.body = Bodies.circle(this.x, this.y, PLINKO.RADIUS, options);
+    this.body = Bodies.circle(this.x, this.y, this.r, options);
     Body.setDensity(this.body, 1)
     this.body.isStatic = true;
     this.body.position.x = this.x;

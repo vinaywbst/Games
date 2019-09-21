@@ -14,6 +14,9 @@ export default class GameEngine extends React.Component {
     super(props);
     this.state = {
       ROWS: 16,
+      betdisabeled:false,
+      plinkoradius:5,
+      particleradius:7,
       footer: {
         a8: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         a9: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
@@ -45,39 +48,61 @@ export default class GameEngine extends React.Component {
     Engine.run(this.engine);
   }
   dropChips = (e) => {
-    if (e === 'manualbet') {
+    if (e === 'manualbet' && !this.state.betdisabeled) {
       this._createParticle()
+      this.setState({
+        betdisabeled:true
+      },()=>{
+       setTimeout(() => {
+        this.setState({
+          betdisabeled:false
+        })
+       }, 1000);
+      })
     }
-    if (e === 'autobet') {
+    if (e === 'autobet' && !this.state.betdisabeled) {
       this._createParticle()
+      this.setState({
+        betdisabeled:true
+      },()=>{
+       setTimeout(() => {
+        this.setState({
+          betdisabeled:false
+        })
+       }, 1000);
+      })
     }
   }
   changeRows = (e) => {
-    document.getElementById('techvr').innerHTML = '';
-    World.remove(this.engine.world, "composite")
-    Render.stop(this.render);
-    Engine.clear(this.engine);
-    Events.off(this.engine, 'collisionStart', this.onCollisionStart);
-    this.setState({
-      ROWS: e
-    })
-    this.createCanvas()
-    this.init(e);
+    
+      document.getElementById('techvr').innerHTML = '';
+      World.remove(this.engine.world, "composite")
+      Render.stop(this.render);
+      Engine.clear(this.engine);
+      Events.off(this.engine, 'collisionStart', this.onCollisionStart);
+      this.setState({
+        ROWS: e
+      },()=>{
+        this.createCanvas()
+        this.init(this.state.ROWS,this.state.plinkoradius);})
+      
+     
+   
   }
 
 
 
   componentDidMount() {
     this.createCanvas()
-    this.init(16);
+    this.init(this.state.ROWS,this.state.plinkoradius);
 
   }
-  init(ROWS) {
+  init(ROWS,r) {
     this.particles = {};
     this.plinkos = {};
     this.lastParticleId = 0;
     this.isRunning = false;
-    this.createEnvironment(ROWS);
+    this.createEnvironment(ROWS,r);
 
   }
 
@@ -87,15 +112,16 @@ export default class GameEngine extends React.Component {
   _createParticle = () => {
     const id = this.lastParticleId++ % 255;
     const x = Math.floor(Math.random() * (400 - 350 + 1)) + 350;
-    const y = 16.72686230248307;
-    let particle = new Particle({ id, x, y });
+    const y = 18;
+    const r = this.state.particleradius;
+    let particle = new Particle({ id, x, y, r});
     particle.recentlyDropped = true;
     this.particles[String(id)] = particle;
     particle.addToEngine(this.engine.world);
     Engine.update(this.engine, this.state.TIMESTEP);    
     let checkParticleStatus = setInterval(() => {
       this.engine.world.bodies.forEach(dt => {
-        if (dt.label === 'particle' && dt.position.y > this.state.CANVAS_HEIGHT - 5 - (this.state.PARTICLE.DIAMETER) / 2) {
+        if (dt.label === 'particle' && dt.position.y > this.state.CANVAS_HEIGHT - 5 - this.state.particleradius) {
           const particle = dt.parentObject
           let newARr = []
           let count = 0;
@@ -157,7 +183,6 @@ export default class GameEngine extends React.Component {
       const bodyB = pair.bodyB;
 
       if (bodyA.label === 'plinko' && bodyB.label === 'particle') {
-        console.log(this.engine)
       }
 
       if (bodyA.label === 'plinko') {
@@ -171,10 +196,10 @@ export default class GameEngine extends React.Component {
 
     }
   }
-  _createPlinkos = (ROWS) => {
+  _createPlinkos = (ROWS,r) => {
     let ROW_SPACING = this.state.CANVAS_HEIGHT / ROWS * this.state.ROW_ADJUSTMENT;
     let COL_SPACING = this.state.CANVAS_WIDTH / (ROWS + 2) * this.state.COL_ADJUSTMENT;
-    this.setState({ COL_SPACING })
+    this.setState({ COL_SPACING,particleradius:COL_SPACING/4.4 })
     const VERTICAL_MARGIN = ROW_SPACING * 1.5;
     const HORIZONTAL_OFFSET = COL_SPACING / 2;
     let id = 0;
@@ -185,7 +210,7 @@ export default class GameEngine extends React.Component {
       for (let col = 0; col <= row; col++) {
         let x = (col * COL_SPACING) + differ;
         let y = VERTICAL_MARGIN + ROWS + ((row - 2) * ROW_SPACING);
-        const plinko = new Plinko({ id, x, y });
+        const plinko = new Plinko({ id, x, y, r });
         this.plinkos[id] = plinko;
         plinko.addToEngine(this.engine.world);  
         id++;
@@ -193,8 +218,8 @@ export default class GameEngine extends React.Component {
     }
   }
 
-  createEnvironment(ROWS) {
-    this._createPlinkos(ROWS);
+  createEnvironment(ROWS,r) {
+    this._createPlinkos(ROWS,r);
     Events.on(this.engine, 'collisionStart', this.onCollisionStart);
   }
   render() {
@@ -216,10 +241,10 @@ export default class GameEngine extends React.Component {
         <Col span={6} pull={18} className="plinko_tab_sidepanel">
           <Tabs defaultActiveKey="manual" size={'small'} className="plinko_tab">
             <TabPane tab="Manual" key="manual">
-              <ManualTabToBet {...this.state.manual} dropChips={this.dropChips} changeRows={this.changeRows} />
+              <ManualTabToBet {...this.state} dropChips={this.dropChips} changeRows={this.changeRows} />
             </TabPane>
             <TabPane tab="Auto" key="auto">
-              <AutoTabToBet  {...this.state.auto} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} dropChips={this.dropChips} changeRows={this.changeRows} />
+              <AutoTabToBet  {...this.state} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} dropChips={this.dropChips} changeRows={this.changeRows} />
             </TabPane>
           </Tabs>
         </Col>

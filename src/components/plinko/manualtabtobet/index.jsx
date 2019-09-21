@@ -50,7 +50,7 @@ class ManualTabToBet extends Component {
                 </div>
                 </>
                 <>
-                <Button className="bet-btn" block size={'large'} onClick={this.props.dropChips.bind(this,'manualbet')}>Bet</Button>
+                <Button className="bet-btn" block size={'large'} disabled={this.props.betdisabeled} onClick={this.props.dropChips.bind(this,'manualbet')}>Bet</Button>
                 </>
             </div>
          );

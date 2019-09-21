@@ -329,3 +329,8 @@ div#techvr {
 .pegs.rows9 .pegs_wrapper {
     width: 72%;
 }
+
+
+.ant-btn.bet-btn{
+    max-width: 350px!important;
+}
