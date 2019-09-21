@@ -7,7 +7,7 @@ section.layout.ant-layout .header + main.ant-layout-content {
 }
 
 section.layout.ant-layout .header + main.ant-layout-content {
-    min-height: calc(100vh - 133px);
+    min-height: calc(100vh - 132px);
     background-color: #192b38;
 }
 .ant-layout-footer {

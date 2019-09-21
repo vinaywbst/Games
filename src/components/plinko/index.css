@@ -135,14 +135,14 @@ div#techvr {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
-    /* margin-top: -30px; */
+    margin-top: -5px;
 }
 .pegs_wrapper {
     display: grid;
     height: 100%;
     position: relative;
     gap: 1% 1%;
-    width: 61.4%;
+    width: 75%;
 }
 .peg1{
     position: relative;
@@ -314,4 +314,18 @@ div#techvr {
 .peg {
     grid-row: 1 / auto;
     font-size: 7px;
+}
+
+.canvas-container {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pegs.rows8 .pegs_wrapper {
+    width: 71%;
+    gap: 1% 2%;
+}
+.pegs.rows9 .pegs_wrapper {
+    width: 72%;
 }

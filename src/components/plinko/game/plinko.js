@@ -20,7 +20,8 @@ export default class Plinko extends GameObject {
     this.body.position.x = this.x;
     this.body.position.y = this.y;
     this.body.label = this.type;
-    this.body.isShrinking = false;
+    this.body.isShrinking = true;
+    this.body.render.strokeStyle = "hsla(0, 0%, 100%, 0.2)"
     this.body.render.fillStyle = PLINKO.FILL;
   }
  
