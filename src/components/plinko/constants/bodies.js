@@ -1,5 +1,5 @@
 export const PLINKO = {
-    FRICTION: 0.9,
+    FRICTION: 1,
     RESTITUTION: 0.8,
     RADIUS: 5,
     FILL:'#fff'
@@ -10,7 +10,7 @@ export const PLINKO = {
   export const PARTICLE = {
     DENSITY: 1/10,
     FRICTION: 0.9,
-    RESTITUTION: 0.8,
+    RESTITUTION: 0.7,
     RADIUS: 7,
     FILL:'#ff4827'
   }

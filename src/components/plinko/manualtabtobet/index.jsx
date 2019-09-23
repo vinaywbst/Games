@@ -18,15 +18,15 @@ class ManualTabToBet extends Component {
                 <label>Bet Amount</label>
                 <div className="total_bet">
                 <Input defaultValue="0.00000000" size={'large'} readOnly={true}/>
-                <Button size={'large'}>½</Button>
+                <Button size={'large'} disabled={this.props.betdisabeled}>½</Button>
                 <Divider type={"vertical"} /> 
-                <Button size={'large'}>2×</Button>        
+                <Button size={'large'} disabled={this.props.betdisabeled}>2×</Button>        
                 </div>
                 </>
                 <>
                 <label>Risk</label>
                 <div className="total_bet">
-                <Select defaultValue="Low" className="custom-select">
+                <Select defaultValue="Low" className="custom-select" disabled={this.props.betdisabeled}>
                 <Option value="Low">Low</Option>
                 <Option value="Medium">Medium</Option>
                 <Option value="High">High</Option>
@@ -36,7 +36,7 @@ class ManualTabToBet extends Component {
                 <>
                 <label>Rows</label>
                 <div className="total_bet">
-                <Select defaultValue={16} className="custom-select" onChange={this.props.changeRows.bind(this)}>
+                <Select defaultValue={16} disabled={this.props.betrowdisabeled} className="custom-select" onChange={this.props.changeRows.bind(this)}>
                 <Option value={8}>8</Option>
                 <Option value={9}>9</Option>
                 <Option value={10}>10</Option>

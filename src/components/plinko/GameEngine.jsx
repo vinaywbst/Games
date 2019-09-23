@@ -1,11 +1,12 @@
 import React from 'react';
-import { World, Engine, Render, Events } from 'matter-js';
+import { World, Engine, Render, Events,Body } from 'matter-js';
 import Plinko from './game/plinko';
 import Particle from './game/particle';
 import { Row, Col, Tabs } from 'antd';
 import ManualTabToBet from './manualtabtobet';
 import AutoTabToBet from './autotabtobet';
 import { PARTICLE } from './constants/bodies';
+import VerticalWall from './game/wall';
 const MS_IN_SECOND = 2000;
 const FPS = 60;
 const { TabPane } = Tabs;
@@ -15,8 +16,10 @@ export default class GameEngine extends React.Component {
     this.state = {
       ROWS: 16,
       betdisabeled:false,
+      betrowdisabeled:false,
       plinkoradius:5,
       particleradius:7,
+      noofautobets:'0',
       footer: {
         a8: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         a9: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
@@ -37,6 +40,12 @@ export default class GameEngine extends React.Component {
       PARTICLE: PARTICLE
     }
 
+  }
+  handleNoOFAutoBets = (e) =>{
+      this.setState({
+        noofautobets:e.target.value
+      })
+     
   }
   createCanvas = () => {
     this.engine = Engine.create(document.getElementById('techvr'));
@@ -61,8 +70,27 @@ export default class GameEngine extends React.Component {
       })
     }
     if (e === 'autobet' && !this.state.betdisabeled) {
+    if(this.state.noofautobets !== '0' && this.state.noofautobets !==0){
+     let ctr = setInterval(() => {
+        this.setState({
+          betdisabeled:true,
+          noofautobets:this.state.noofautobets - 1
+      },()=>{
+        this._createParticle()
+        if(this.state.noofautobets === 0){
+          this.setState({
+            betdisabeled:false,
+          },()=>{
+            clearInterval(ctr)
+          })
+         
+        }
+      })
+      }, 1000);
+      
+    }else{
       this._createParticle()
-      this.setState({
+         this.setState({
         betdisabeled:true
       },()=>{
        setTimeout(() => {
@@ -71,6 +99,8 @@ export default class GameEngine extends React.Component {
         })
        }, 1000);
       })
+    }
+  
     }
   }
   changeRows = (e) => {
@@ -101,6 +131,7 @@ export default class GameEngine extends React.Component {
     this.particles = {};
     this.plinkos = {};
     this.lastParticleId = 0;
+    this.walls={};
     this.isRunning = false;
     this.createEnvironment(ROWS,r);
 
@@ -118,7 +149,12 @@ export default class GameEngine extends React.Component {
     particle.recentlyDropped = true;
     this.particles[String(id)] = particle;
     particle.addToEngine(this.engine.world);
-    Engine.update(this.engine, this.state.TIMESTEP);    
+    this.setState({
+      betrowdisabeled:true
+    },()=>{
+      Engine.update(this.engine, this.state.TIMESTEP);    
+    })
+ 
     let checkParticleStatus = setInterval(() => {
       this.engine.world.bodies.forEach(dt => {
         if (dt.label === 'particle' && dt.position.y > this.state.CANVAS_HEIGHT - 5 - this.state.particleradius) {
@@ -165,6 +201,9 @@ export default class GameEngine extends React.Component {
           setTimeout(() => {
             if (checkParticle.length === 0) {
               clearInterval(checkParticleStatus)
+              this.setState({
+              betrowdisabeled:false
+              })
             }
           }, 10);
         }
@@ -217,9 +256,24 @@ export default class GameEngine extends React.Component {
       }
     }
   }
-
+  _createWalls=()=> {
+ 
+    const leftWall = new VerticalWall({x: 210, y: 310});
+    const rightWall = new VerticalWall({x: 555, y: 310});
+    [leftWall, rightWall].forEach(wall => wall.addToEngine(this.engine.world));
+    this.engine.world.bodies.filter(el => el.label === "wall").forEach((dt,i) => {
+      dt.render.opacity = 0
+   if(dt.position.x < 250){
+    Body.rotate( dt.parent, 0.48);
+   }else{
+    Body.rotate( dt.parent, -0.48);
+   }
+     
+    })
+  }
   createEnvironment(ROWS,r) {
     this._createPlinkos(ROWS,r);
+    this._createWalls();
     Events.on(this.engine, 'collisionStart', this.onCollisionStart);
   }
   render() {
@@ -244,7 +298,7 @@ export default class GameEngine extends React.Component {
               <ManualTabToBet {...this.state} dropChips={this.dropChips} changeRows={this.changeRows} />
             </TabPane>
             <TabPane tab="Auto" key="auto">
-              <AutoTabToBet  {...this.state} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} dropChips={this.dropChips} changeRows={this.changeRows} />
+              <AutoTabToBet  {...this.state} on_change_win={this.onChangeWin} on_change_loss={this.onChangeLoss} dropChips={this.dropChips} changeRows={this.changeRows} handleNoOFAutoBets={this.handleNoOFAutoBets} />
             </TabPane>
           </Tabs>
         </Col>

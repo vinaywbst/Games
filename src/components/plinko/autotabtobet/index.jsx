@@ -13,15 +13,15 @@ class AutoTabToBet extends Component {
                 <label>Bet Amount</label>
                 <div className="total_bet">
                 <Input defaultValue="0.00000000" size={'large'} readOnly={true}/>
-                <Button size={'large'}>½</Button>
+                <Button disabled={this.props.betdisabeled} size={'large'}>½</Button>
                 <Divider type={"vertical"} /> 
-                <Button size={'large'}>2×</Button>        
+                <Button disabled={this.props.betdisabeled} size={'large'}>2×</Button>        
                 </div>
                 </>
                 <>
                 <label>Risk</label>
                 <div className="total_bet">
-                <Select defaultValue="Low" className="custom-select">
+                <Select defaultValue="Low" disabled={this.props.betdisabeled} className="custom-select">
                 <Option value="Low">Low</Option>
                 <Option value="Medium">Medium</Option>
                 <Option value="High">High</Option>
@@ -31,7 +31,7 @@ class AutoTabToBet extends Component {
                 <>
                 <label>Rows</label>
                 <div className="total_bet">
-                <Select defaultValue={16} className="custom-select" onChange={this.props.changeRows.bind(this)}>
+                <Select defaultValue={16} className="custom-select" disabled={this.props.betrowdisabeled} onChange={this.props.changeRows.bind(this)}>
                 <Option value={8}>8</Option>
                 <Option value={9}>9</Option>
                 <Option value={10}>10</Option>
@@ -47,12 +47,12 @@ class AutoTabToBet extends Component {
                 <>
                 <label>Number of Bets</label>
                 <div className="total_bet">
-                <Input defaultValue="0" size={'large'} type='number'/>       
+                <Input value={this.props.noofautobets} size={'large'} type='number' onChange={this.props.handleNoOFAutoBets} disabled={this.props.betrowdisabeled}/>       
                 </div>
                 </>
                
                 <>
-                <Button className="bet-btn" block size={'large'} disabled={this.props.betdisabeled} onClick={this.props.dropChips.bind(this,'autobet')}>Start Autobet</Button>
+                <Button className="bet-btn" block size={'large'} disabled={this.props.betdisabeled} onClick={this.props.dropChips.bind(this,'autobet')}>{this.props.betdisabeled ? 'Stop Autobet' : 'Start Autobet'}</Button>
                 </>
             </div>
          );
