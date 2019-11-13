@@ -49,7 +49,7 @@ export default class GameEngine extends React.Component {
   }
   createCanvas = () => {
     this.engine = Engine.create(document.getElementById('techvr'));
-    this.engine.world.gravity.y = 1.5;
+    this.engine.world.gravity.y = 1;
     this.engine.render.canvas.height = this.state.CANVAS_HEIGHT;
     this.engine.render.canvas.width = this.state.CANVAS_WIDTH;
     this.engine.render.options.wireframes = false;
@@ -142,9 +142,11 @@ export default class GameEngine extends React.Component {
 
   _createParticle = () => {
     const id = this.lastParticleId++ % 255;
-    const x = Math.floor(Math.random() * (400 - 350 + 1)) + 350;
-    const y = 18;
+    const x = 358
+    const y = 22;
+    console.log('x=',x,'y=',y)
     const r = this.state.particleradius;
+    if(!this.engine.world.bodies.filter(el => el.label === "particle").length){
     let particle = new Particle({ id, x, y, r});
     particle.recentlyDropped = true;
     this.particles[String(id)] = particle;
@@ -209,7 +211,7 @@ export default class GameEngine extends React.Component {
         }
       })
 
-    }, this.state.TIMESTEP);
+    }, this.state.TIMESTEP);}
   }
 
 
