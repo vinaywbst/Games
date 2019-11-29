@@ -24,7 +24,7 @@ function App() {
         <Route exact path="/plinko" render={() => <Plinko/>}/>
         <Route exact path="/baccarat" render={() => <Baccarat/>}/>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>BetProtocol Games ©2019</Footer>
+        <Footer style={{ textAlign: 'center' }}>Websultanate Software Technologies Pvt Ltd ©2019</Footer>
         </Router>
         </Layout>
     </div>

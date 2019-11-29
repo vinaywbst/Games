@@ -142,11 +142,10 @@ export default class GameEngine extends React.Component {
 
   _createParticle = () => {
     const id = this.lastParticleId++ % 255;
-    const x = 358
-    const y = 22;
+    const x = Math.floor(Math.random() * (400 - 350 + 1)) + 350;
+    const y = 18;
     console.log('x=',x,'y=',y)
     const r = this.state.particleradius;
-    if(!this.engine.world.bodies.filter(el => el.label === "particle").length){
     let particle = new Particle({ id, x, y, r});
     particle.recentlyDropped = true;
     this.particles[String(id)] = particle;
@@ -211,7 +210,7 @@ export default class GameEngine extends React.Component {
         }
       })
 
-    }, this.state.TIMESTEP);}
+    }, this.state.TIMESTEP);
   }
 
 

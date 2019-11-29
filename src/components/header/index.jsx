@@ -24,7 +24,7 @@ componentWillMount(){
         return ( 
             <div className="header">
                <Header>
-                <div className="logo">BetProtocol</div>
+                <div className="logo">Websultanate</div>
                 <Menu
                     theme="dark"
                     mode="horizontal"
